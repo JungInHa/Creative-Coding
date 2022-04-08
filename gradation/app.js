@@ -4,4 +4,16 @@ const COLORS = [
   {r: 255, g: 104, b: 248}, // purple
   {r: 44, g: 209, b: 252}, // skyblue
   {r: 54, g: 74233, b: 84}, // green
-]
+];
+
+class App {
+	constructor() {
+		this.canvas = document.createElement('canvas');
+		document.body.appendChild(this.canvas);
+		this.ctx = this.canvas.getContext('2d');
+	}
+}
+
+window.onload = () => {
+	new App();
+}
