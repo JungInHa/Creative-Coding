@@ -1,3 +1,5 @@
+import { GlowParticle } from "./glowparticles.js";
+
 const COLORS = [
   {r: 45, g: 74, b: 227}, // blue
 	{r: 250, g: 255, b: 89}, // yellow
@@ -14,6 +16,11 @@ class App {
 
 		this.pixelRatio = (window.devicePixelRatio > 1) ? 2 : 1;
 
+        this.totalParticles = 15;
+        this.particles = [];
+        this.maxRadius = 900;
+        this.minRadius = 400;
+
 		window.addEventListener('resize', this.resize.bind(this), false);
 		this.resize();
 	}
@@ -28,6 +35,28 @@ class App {
 
 		this.createParticles();
 	}
+
+	createParticles() {
+        let curColor = 0;
+        this.particles = [];
+
+        for (let i = 0; i < this.totalParticles; i++) {
+            const item = new GlowParticle(
+                Math.random() * this.stageWidth,
+                Math.random() * this.stageHeight,
+                Math.random() * 
+                    (this.maxRadius - this.minRadius) + this.minRadius,
+                COLORS[curColor]
+            );
+
+            if (++curColor >= COLORS.length) {
+                curColor = 0;
+            }
+
+            this.particles[i] = item;
+        }
+    }
+
 }
 
 window.onload = () => {
