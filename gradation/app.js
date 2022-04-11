@@ -23,6 +23,7 @@ class App {
 
 		window.addEventListener('resize', this.resize.bind(this), false);
 		this.resize();
+		window.requestAnimationFrame(this.animate.bind(this));
 	}
 
 	resize() {
@@ -57,6 +58,16 @@ class App {
         }
     }
 
+	animate() {
+        window.requestAnimationFrame(this.animate.bind(this));
+
+        this.ctx.clearRect(0, 0, this.stageWidth, this.stageHeight);
+
+        for (let i = 0; i < this.totalParticles; i++) {
+            const item = this.particles[i];
+            item.animate(this.ctx, this.stageWidth, this.stageHeight);
+        }
+    }
 }
 
 window.onload = () => {
